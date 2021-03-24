@@ -9,7 +9,7 @@ function SignUp() {
   function handleSubmit() {
     axios({
       method: "post",
-      url: "http://127.0.0.1:5000/mtg-stone/sign-up",
+      url: "http://localhost:5000/mtg-stone/sign-up",
       data: {
         username: username,
         email: email,

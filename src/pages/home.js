@@ -25,9 +25,9 @@ function Home() {
             <img src={card.imageUrl} alt={card.name} />
 
             <div className="fav-icon_btn">
-              <a>
+              <button>
                 <FontAwesomeIcon icon="star" />
-              </a>
+              </button>
             </div>
           </div>
         )
@@ -52,4 +52,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;
