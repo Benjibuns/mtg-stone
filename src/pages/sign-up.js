@@ -8,15 +8,22 @@ function SignUp() {
 
   function handleSubmit() {
     axios({
-      methods: "post",
-      url: "localhost:5000/mtg-stone/sign-up",
+      method: "post",
+      url: "http://127.0.0.1:5000/mtg-stone/sign-up",
       data: {
         username: username,
         email: email,
         password: password,
       },
-    });
-    console.log("submitted", username, email, password);
+
+      withCredentials: true,
+    })
+      .then((response) => {
+        console.log("user", response);
+      })
+      .catch((error) => {
+        console.log("error creating user", error);
+      });
   }
 
   return (
@@ -68,10 +75,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-// (event) => {
-//   setUsername(username);
-//   setEmail(email);
-//   setPassword(password);
-//   handleSubmit(event);
-// }
