@@ -1,0 +1,13 @@
+.home-content {
+  display: grid;
+  align-items: center;
+
+  .home-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    .fav-btn {
+      cursor: pointer;
+    }
+  }
+}
