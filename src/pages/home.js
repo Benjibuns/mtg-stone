@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LogIn } from "./log-in";
 
-function Home() {
+function Home(props) {
   const [cards, setCards] = useState([]);
+  
 
   function allCards() {
     axios
@@ -17,23 +19,55 @@ function Home() {
       });
   }
 
-  const renderCards = () => {
-    return cards.map((card) => {
-      return (
-        card.imageUrl && (
-          <div key={card.id} className="card">
-            <img src={card.imageUrl} alt={card.name} />
+  function handleAddCard(params) {
+    console.log(params);
+    console.log(props);
+    axios({
+      method: "post",
+      url: "http://localhost:5000/mtg-user/add-card-to-user",
+      data: {
+        cardId: params.id,
+        userId: props.userId,
+      },
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-            <div className="fav-icon_btn">
-              <button>
-                <FontAwesomeIcon icon="star" />
-              </button>
+  function renderCards() {
+    if (props.userId) {
+      return cards.map((card) => {
+        return (
+          card.imageUrl && (
+            <div key={card.id} className="card">
+              <img src={card.imageUrl} alt={card.name} />
+
+              <div className="fav-icon_btn">
+                <button onClick={() => handleAddCard(card)}>
+                  <FontAwesomeIcon icon="star" />
+                </button>
+              </div>
             </div>
-          </div>
-        )
-      );
-    });
-  };
+          )
+        );
+      });
+    } else {
+      return cards.map((card) => {
+        return (
+          card.imageUrl && (
+            <div key={card.id} className="card">
+              <img src={card.imageUrl} alt={card.name} />
+            </div>
+          )
+        );
+      });
+    }
+  }
 
   useEffect(() => {
     allCards();
@@ -43,8 +77,16 @@ function Home() {
     <div className="home-content">
       <div className="nav-bar">
         <div className="nav-items">
-          <a href="/sign-up">Sign Up</a>
-          <button>log in</button>
+          {props.loggedInStatus === "LOGGED_IN" ? (
+            <div className="auth-components">
+              <button>Logout</button>
+            </div>
+          ) : (
+            <div className="auth-components">
+              <a href="/sign-up">Sign Up</a>
+              <a href="/log-in">log in</a>
+            </div>
+          )}
         </div>
       </div>
       <div className="home-cards">{renderCards()}</div>

@@ -6,14 +6,14 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit() {
+  function handleRegisterSubmit() {
     axios({
       method: "post",
       url: "http://localhost:5000/mtg-stone/sign-up",
       data: {
-        username: username,
-        email: email,
-        password: password,
+        username,
+        email,
+        password,
       },
 
       withCredentials: true,
@@ -29,7 +29,7 @@ function SignUp() {
   return (
     <form
       onSubmit={(event) => {
-        handleSubmit(event);
+        handleRegisterSubmit(event);
         event.preventDefault();
       }}
       className="sign-up-form"
