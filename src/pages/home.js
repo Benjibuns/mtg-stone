@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LogIn } from "./log-in";
 
 function Home(props) {
   const [cards, setCards] = useState([]);
-  
 
   function allCards() {
     axios
       .get("https://api.magicthegathering.io/v1/cards")
       .then((response) => {
-        console.log(response.data.cards);
         setCards(response.data.cards);
       })
       .catch((error) => {
@@ -20,14 +17,13 @@ function Home(props) {
   }
 
   function handleAddCard(params) {
-    console.log(params);
-    console.log(props);
     axios({
       method: "post",
-      url: "http://localhost:5000/mtg-user/add-card-to-user",
+      url: "http://localhost:5000/mtg-stone/add-card-to-user",
       data: {
-        cardId: params.id,
-        userId: props.userId,
+        card_name: params.name,
+        api_card_id: params.id,
+        user_id: props.userId,
       },
       withCredentials: true,
     })
