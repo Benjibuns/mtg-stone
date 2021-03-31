@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { API_URL } from "../helpers/api-url";
 
 function Home(props) {
   function handleAddCard(params) {
     axios({
       method: "post",
-      url: "http://localhost:5000/mtg-stone/add-card-to-user",
+      url: `${API_URL}/add-card-to-user`,
       data: {
         card_name: params.name,
         api_card_id: params.id,
@@ -15,7 +15,10 @@ function Home(props) {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        if (res.data === "Added to library") {
+          alert("Card Added To Your Profile");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -51,10 +54,6 @@ function Home(props) {
       });
     }
   }
-
-  useEffect(() => {
-    renderCards();
-  }, [props.userId]);
 
   return (
     <div className="home-content">

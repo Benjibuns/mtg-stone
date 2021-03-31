@@ -9,6 +9,7 @@ import Profile from "./pages/profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navigation from "./navigation";
+import { API_URL } from "./helpers/api-url";
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -18,7 +19,7 @@ function App() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:5000/mtg-stone/logged-in",
+      url: `${API_URL}/logged-in`,
       withCredentials: true,
     })
       .then((res) => {
@@ -46,7 +47,7 @@ function App() {
   const handleLogout = () => {
     axios({
       method: "post",
-      url: "http://localhost:5000/mtg-stone/logout",
+      url: `${API_URL}/logout`,
       withCredentials: true,
     })
       .then(() => {

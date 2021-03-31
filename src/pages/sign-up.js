@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { API_URL } from "../helpers/api-url";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ function SignUp() {
   function handleRegisterSubmit() {
     axios({
       method: "post",
-      url: "http://localhost:5000/mtg-stone/sign-up",
+      url: `${API_URL}/sign-up`,
       data: {
         username,
         email,
@@ -43,6 +44,7 @@ function SignUp() {
           type="text"
           name="username"
           placeholder="Your username"
+          required
         />
         This will be shown with your public decks
       </div>
@@ -54,6 +56,7 @@ function SignUp() {
           type="email"
           name="email"
           placeholder="Your email"
+          required
         />
       </div>
 
@@ -64,6 +67,7 @@ function SignUp() {
           type="password"
           name="password"
           placeholder="Set password"
+          required
         />
       </div>
 

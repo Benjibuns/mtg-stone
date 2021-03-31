@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../helpers/api-url";
 
 function LogIn(props) {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ function LogIn(props) {
     event.preventDefault();
     axios({
       method: "post",
-      url: "http://localhost:5000/mtg-stone/log-in",
+      url: `${API_URL}/log-in`,
       data: {
         email,
         password,
@@ -40,6 +41,7 @@ function LogIn(props) {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="Your email"
+          required
         />
 
         <input
@@ -48,6 +50,7 @@ function LogIn(props) {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="Your password"
+          required
         />
 
         <button type="submit">Log In</button>
