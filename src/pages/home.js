@@ -83,13 +83,6 @@ function Home(props) {
       </div>
     );
   }
-
-  return (
-    <div className="home-content">
-      {props.searchedCard && props.searchedCard.imageUrl}
-      <div className="home-cards">{renderCards()}</div>
-    </div>
-  );
 }
 
 export default Home;

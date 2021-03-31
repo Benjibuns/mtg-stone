@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { NavLink } from "react-router-dom";
 import CardSearch from "./card-search/search-bar";
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 
 const CardSearch = (props) => {
   const [input, setInput] = useState("");
