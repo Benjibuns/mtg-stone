@@ -15,6 +15,7 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
   const [cards, setCards] = useState([]);
+  const [searchedCard, setSearchedCard] = useState({});
 
   useEffect(() => {
     axios({
@@ -44,6 +45,15 @@ function App() {
       });
   }, []);
 
+  const cardSearchFilter = (cardName) => {
+    const filteredCard = cards.filter((card) => {
+      return card.name === cardName;
+    })[0];
+    if (filteredCard) {
+      setSearchedCard(filteredCard);
+    }
+  };
+
   const handleLogout = () => {
     axios({
       method: "post",
@@ -65,6 +75,9 @@ function App() {
         <Navigation
           loggedInStatus={loggedInStatus}
           handleLogout={handleLogout}
+          cards={cards}
+          setCards={setCards}
+          cardSearchFilter={cardSearchFilter}
         />
         <Switch>
           <Route exact path="/">
@@ -74,6 +87,8 @@ function App() {
               handleLogout={handleLogout}
               setCards={setCards}
               cards={cards}
+              searchedCard={searchedCard}
+              setSearchedCard={setSearchedCard}
             />
           </Route>
           <Route path="/sign-up" component={SignUp} />

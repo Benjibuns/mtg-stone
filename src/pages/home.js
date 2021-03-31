@@ -15,7 +15,6 @@ function Home(props) {
       withCredentials: true,
     })
       .then((res) => {
-        // console.log(res);
         if (res.data === "Added to library") {
           alert("Card Added To Your Profile");
         }
@@ -55,8 +54,39 @@ function Home(props) {
     }
   }
 
+  const renderSearchedCard = () => {
+    return (
+      <div className="card">
+        <img src={props.searchedCard.imageUrl} alt={props.searchedCard.name} />
+        {props.userId && (
+          <div className="fav-icon_btn">
+            <button onClick={() => handleAddCard(props.searchedCard)}>
+              <FontAwesomeIcon icon="star" />
+            </button>
+          </div>
+        )}
+        <button onClick={() => props.setSearchedCard({})}>Reset</button>
+      </div>
+    );
+  };
+
+  if (Object.keys(props.searchedCard).length > 0) {
+    return (
+      <div className="home-content">
+        <div className="home-cards">{renderSearchedCard()}</div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="home-content">
+        <div className="home-cards">{renderCards()}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="home-content">
+      {props.searchedCard && props.searchedCard.imageUrl}
       <div className="home-cards">{renderCards()}</div>
     </div>
   );

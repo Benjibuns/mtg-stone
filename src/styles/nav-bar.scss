@@ -1,0 +1,16 @@
+.nav-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  .nav-bar_search {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-bar_right {
+    display: flex;
+    justify-content: flex-end;
+    
+    
+  }
+}
