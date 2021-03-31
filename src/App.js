@@ -23,7 +23,7 @@ function App() {
       withCredentials: true,
     })
       .then((res) => {
-        if (res.data) {
+        if (res.data.message === "User Verified") {
           setLoggedInStatus("LOGGED_IN");
           setUserId(res.data.user_id);
         }
