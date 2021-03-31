@@ -39,12 +39,32 @@ function Profile(props) {
     setUserCards(filterdCards);
   };
 
+  const handleDeleteCard = (cardToDelete) => {
+    axios({
+      method: "delete",
+      url: `http://localhost:5000/mtg-stone/remove-card-from-user`,
+      data: {
+        api_card_id: cardToDelete.id,
+        user_id: props.userId,
+      },
+    })
+      .then((res) => {
+        if (res.data == "Card Deleted") {
+          setUserCards(userCards.filter((card) => card.id !== cardToDelete.id));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const renderUserCards = () => {
     return userCards.map((card) => {
       return (
         card.imageUrl && (
           <div key={card.id} className="card">
             <img src={card.imageUrl} alt={card.name} />
+            <button onClick={() => handleDeleteCard(card)}>Delete</button>
           </div>
         )
       );
@@ -52,9 +72,9 @@ function Profile(props) {
   };
 
   return (
-    <div>
-      <h1>Hello</h1>
-      {renderUserCards()}
+    <div className="home-content">
+      <h1>Profile</h1>
+      <div className="home-cards">{renderUserCards()}</div>
     </div>
   );
 }
