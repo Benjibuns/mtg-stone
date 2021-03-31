@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 import CardSearch from "./card-search/search-bar";
 
 const Navigation = (props) => {
-  // const [input, setInput] = useState("");
-
   if (props.loggedInStatus === "LOGGED_IN") {
     return (
       <div className="nav-bar">
@@ -16,14 +14,16 @@ const Navigation = (props) => {
               Profile
             </NavLink>
           </div>
+        </div>
 
-          <CardSearch cardSearchFilter={props.cardSearchFilter}/>
+        <div className="nav-bar_search">
+          <CardSearch cardSearchFilter={props.cardSearchFilter} />
+        </div>
 
-          <div className="nav-bar_right">
-            <button className="logout-btn" onClick={() => props.handleLogout()}>
-              Logout
-            </button>
-          </div>
+        <div className="nav-bar_right">
+          <button className="logout-btn" onClick={() => props.handleLogout()}>
+            Logout
+          </button>
         </div>
       </div>
     );
@@ -31,12 +31,12 @@ const Navigation = (props) => {
   return (
     <div className="nav-bar">
       <div className="nav-bar_left">
-        <NavLink className="profile-btn" to="/">
-          Home
-        </NavLink>
+        <NavLink to="/">Home</NavLink>
       </div>
 
-      <CardSearch cardSearchFilter={props.cardSearchFilter}/>
+      <div className="nav-bar_sear">
+        <CardSearch cardSearchFilter={props.cardSearchFilter} />
+      </div>
 
       <div className="nav-bar_right">
         <NavLink to="/sign-up">Sign Up</NavLink>

@@ -46,7 +46,6 @@ function SignUp() {
           placeholder="Your username"
           required
         />
-        This will be shown with your public decks
       </div>
 
       <div className="sign-up-input">

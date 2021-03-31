@@ -1,16 +1,38 @@
 .nav-bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px;
+  align-items: center;
+
+  .nav-bar_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    a {
+      padding: 5px 10px;
+      margin: 5px;
+      border: 1px solid black;
+      text-decoration: none;
+      color: black;
+    }
+  }
 
   .nav-bar_search {
     display: flex;
     justify-content: center;
   }
-  
+
   .nav-bar_right {
     display: flex;
     justify-content: flex-end;
-    
-    
+
+    a {
+      padding: 5px 10px;
+      border: 1px solid black;
+      text-decoration: none;
+      color: black;
+      margin: 5px;
+    }
   }
 }
