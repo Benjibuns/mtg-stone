@@ -8,6 +8,7 @@ import LogIn from "./pages/log-in";
 import Profile from "./pages/profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Navigation from "./navigation";
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -42,8 +43,6 @@ function App() {
       });
   }, []);
 
-  
-
   const handleLogout = () => {
     axios({
       method: "post",
@@ -62,6 +61,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Navigation
+          loggedInStatus={loggedInStatus}
+          handleLogout={handleLogout}
+        />
         <Switch>
           <Route exact path="/">
             <Home

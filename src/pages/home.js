@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 
 function Home(props) {
   function handleAddCard(params) {
@@ -59,31 +58,6 @@ function Home(props) {
 
   return (
     <div className="home-content">
-      <div className="nav-bar">
-        {props.loggedInStatus === "LOGGED_IN" ? (
-          <div className="nav-bar_left">
-            <div className="profile">
-              <Link className="profile-btn" to="/profile">
-                Profile
-              </Link>
-            </div>
-
-            <div className="nav-bar_right">
-              <button
-                className="logout-btn"
-                onClick={() => props.handleLogout()}
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="nav-bar_right">
-            <Link to="/sign-up">Sign Up</Link>
-            <Link to="/log-in">log in</Link>
-          </div>
-        )}
-      </div>
       <div className="home-cards">{renderCards()}</div>
     </div>
   );
