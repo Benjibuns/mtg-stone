@@ -47,7 +47,7 @@ function App() {
 
   const cardSearchFilter = (cardName) => {
     const filteredCard = cards.filter((card) => {
-      return card.name === cardName;
+      return card.name.toLowerCase() === cardName.toLowerCase();
     })[0];
     if (filteredCard) {
       setSearchedCard(filteredCard);
