@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { API_URL } from "../helpers/api-url";
+import { useHistory } from "react-router-dom";
 
-function SignUp() {
+function SignUp(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  let history = useHistory();
 
   function handleRegisterSubmit() {
     axios({
@@ -19,8 +22,10 @@ function SignUp() {
 
       withCredentials: true,
     })
-      .then((response) => {
-        console.log("user", response);
+      .then((res) => {
+        props.setLoggedInStatus("LOGGED_IN");
+        props.setUserId(res.data.id);
+        history.push("/");
       })
       .catch((error) => {
         console.log("error creating user", error);

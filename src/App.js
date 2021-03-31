@@ -91,7 +91,12 @@ function App() {
               setSearchedCard={setSearchedCard}
             />
           </Route>
-          <Route path="/sign-up" component={SignUp} />
+          <Route path="/sign-up">
+            <SignUp
+              setLoggedInStatus={setLoggedInStatus}
+              setUserId={setUserId}
+            />
+          </Route>
           <Route path="/log-in">
             <LogIn
               setLoggedInStatus={setLoggedInStatus}
