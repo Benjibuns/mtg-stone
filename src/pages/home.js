@@ -1,21 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 function Home(props) {
-  const [cards, setCards] = useState([]);
-
-  function allCards() {
-    axios
-      .get("https://api.magicthegathering.io/v1/cards")
-      .then((response) => {
-        setCards(response.data.cards);
-      })
-      .catch((error) => {
-        console.log("error allCards", error);
-      });
-  }
-
   function handleAddCard(params) {
     axios({
       method: "post",
@@ -37,7 +25,7 @@ function Home(props) {
 
   function renderCards() {
     if (props.userId) {
-      return cards.map((card) => {
+      return props.cards.map((card) => {
         return (
           card.imageUrl && (
             <div key={card.id} className="card">
@@ -53,7 +41,7 @@ function Home(props) {
         );
       });
     } else {
-      return cards.map((card) => {
+      return props.cards.map((card) => {
         return (
           card.imageUrl && (
             <div key={card.id} className="card">
@@ -66,24 +54,35 @@ function Home(props) {
   }
 
   useEffect(() => {
-    allCards();
-  }, []);
+    renderCards();
+  }, [props.userId]);
 
   return (
     <div className="home-content">
       <div className="nav-bar">
-        <div className="nav-items">
-          {props.loggedInStatus === "LOGGED_IN" ? (
-            <div className="auth-components">
-              <button>Logout</button>
+        {props.loggedInStatus === "LOGGED_IN" ? (
+          <div className="nav-bar_left">
+            <div className="profile">
+              <Link className="profile-btn" to="/profile">
+                Profile
+              </Link>
             </div>
-          ) : (
-            <div className="auth-components">
-              <a href="/sign-up">Sign Up</a>
-              <a href="/log-in">log in</a>
+
+            <div className="nav-bar_right">
+              <button
+                className="logout-btn"
+                onClick={() => props.handleLogout()}
+              >
+                Logout
+              </button>
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="nav-bar_right">
+            <Link to="/sign-up">Sign Up</Link>
+            <Link to="/log-in">log in</Link>
+          </div>
+        )}
       </div>
       <div className="home-cards">{renderCards()}</div>
     </div>
